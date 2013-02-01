@@ -655,8 +655,6 @@ extern struct bfd_link_needed_list *bfd_elf_get_needed_list
   (bfd *, struct bfd_link_info *);
 extern bfd_boolean bfd_elf_get_bfd_needed_list
   (bfd *, struct bfd_link_needed_list **);
-extern bfd_boolean bfd_elf_stack_segment_size (bfd *, struct bfd_link_info *,
-					       const char *, bfd_vma);
 extern bfd_boolean bfd_elf_size_dynamic_sections
   (bfd *, const char *, const char *, const char *, const char *, const char *,
    const char * const *, struct bfd_link_info *, struct bfd_section **);
@@ -2060,7 +2058,6 @@ enum bfd_architecture
   bfd_arch_tic6x,     /* Texas Instruments TMS320C6X */
   bfd_arch_tic80,     /* TI TMS320c80 (MVP) */
   bfd_arch_v850,      /* NEC V850 */
-  bfd_arch_v850_rh850,/* NEC V850 (using RH850 ABI) */
 #define bfd_mach_v850          1
 #define bfd_mach_v850e         'E'
 #define bfd_mach_v850e1        '1'
@@ -5077,37 +5074,6 @@ value in a word.  The relocation is relative offset from  */
 the dynamic object into the runtime process image.  */
   BFD_RELOC_MICROBLAZE_COPY,
 
-/* Unused Reloc  */
-  BFD_RELOC_MICROBLAZE_64_TLS,
-
-/* This is a 64 bit reloc that stores the 32 bit GOT relative value
-of the GOT TLS GD info entry in two words (with an imm instruction). The
-relocation is GOT offset.  */
-  BFD_RELOC_MICROBLAZE_64_TLSGD,
-
-/* This is a 64 bit reloc that stores the 32 bit GOT relative value
-of the GOT TLS LD info entry in two words (with an imm instruction). The
-relocation is GOT offset.  */
-  BFD_RELOC_MICROBLAZE_64_TLSLD,
-
-/* This is a 32 bit reloc that stores the Module ID to GOT(n).  */
-  BFD_RELOC_MICROBLAZE_32_TLSDTPMOD,
-
-/* This is a 32 bit reloc that stores TLS offset to GOT(n+1).  */
-  BFD_RELOC_MICROBLAZE_32_TLSDTPREL,
-
-/* This is a 32 bit reloc for storing TLS offset to two words (uses imm
-instruction)  */
-  BFD_RELOC_MICROBLAZE_64_TLSDTPREL,
-
-/* This is a 64 bit reloc that stores 32-bit thread pointer relative offset
-to two words (uses imm instruction).  */
-  BFD_RELOC_MICROBLAZE_64_TLSGOTTPREL,
-
-/* This is a 64 bit reloc that stores 32-bit thread pointer relative offset
-to two words (uses imm instruction).  */
-  BFD_RELOC_MICROBLAZE_64_TLSTPREL,
-
 /* AArch64 ADD immediate instruction, holding bits 0 to 11 of the address.
 Used in conjunction with BFD_RELOC_AARCH64_ADR_HI21_PCREL.  */
   BFD_RELOC_AARCH64_ADD_LO12,
@@ -6768,9 +6734,6 @@ bfd_boolean bfd_compress_section_contents
 
 bfd_boolean bfd_get_full_section_contents
    (bfd *abfd, asection *section, bfd_byte **ptr);
-
-void bfd_cache_section_contents
-   (asection *sec, void *contents);
 
 bfd_boolean bfd_is_section_compressed
    (bfd *abfd, asection *section);

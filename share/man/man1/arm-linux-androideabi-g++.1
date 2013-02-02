@@ -124,7 +124,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2012-09-03" "gcc-4.6.3" "GNU"
+.TH GCC 1 "2012-11-06" "gcc-4.6.4" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -606,7 +606,8 @@ in the following sections.
 \&\-mno\-wide\-multiply  \-mrtd  \-malign\-double 
 \&\-mpreferred\-stack\-boundary=\fR\fInum\fR
 \&\fB\-mincoming\-stack\-boundary=\fR\fInum\fR 
-\&\fB\-mcld \-mcx16 \-msahf \-mmovbe \-mcrc32 \-mrecip \-mvzeroupper 
+\&\fB\-mcld \-mcx16 \-msahf \-mmovbe \-mcrc32 \-mrecip 
+\&\-mvzeroupper \-mprefer\-avx128 
 \&\-mmmx  \-msse  \-msse2 \-msse3 \-mssse3 \-msse4.1 \-msse4.2 \-msse4 \-mavx 
 \&\-maes \-mpclmul \-mfsgsbase \-mrdrnd \-mf16c \-mfused\-madd 
 \&\-msse4a \-m3dnow \-mpopcnt \-mabm \-mbmi \-mtbm \-mfma4 \-mxop \-mlwp 
@@ -861,8 +862,8 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\-m5\-compact  \-m5\-compact\-nofpu 
 \&\-mb  \-ml  \-mdalign  \-mrelax 
 \&\-mbigtable \-mfmovd \-mhitachi \-mrenesas \-mno\-renesas \-mnomacsave 
-\&\-mieee  \-mbitops  \-misize  \-minline\-ic_invalidate \-mpadstruct  \-mspace 
-\&\-mprefergot  \-musermode \-multcost=\fR\fInumber\fR \fB\-mdiv=\fR\fIstrategy\fR 
+\&\-mieee \-mno\-ieee \-mbitops  \-misize  \-minline\-ic_invalidate \-mpadstruct 
+\&\-mspace \-mprefergot  \-musermode \-multcost=\fR\fInumber\fR \fB\-mdiv=\fR\fIstrategy\fR 
 \&\fB\-mdivsi3_libfunc=\fR\fIname\fR \fB\-mfixed\-range=\fR\fIregister-range\fR 
 \&\fB\-madjust\-unroll \-mindexed\-addressing \-mgettrcost=\fR\fInumber\fR \fB\-mpt\-fixed 
 \&\-maccumulate\-outgoing\-args \-minvalid\-symbols\fR
@@ -4720,8 +4721,12 @@ Dump after live range splitting.
 .IX Item "-fdump-rtl-dfinish"
 .PD
 These dumps are defined but always produce empty files.
+.IP "\fB\-da\fR" 4
+.IX Item "-da"
+.PD 0
 .IP "\fB\-fdump\-rtl\-all\fR" 4
 .IX Item "-fdump-rtl-all"
+.PD
 Produce all the dumps listed above.
 .IP "\fB\-dA\fR" 4
 .IX Item "-dA"
@@ -4733,10 +4738,6 @@ normal output.
 .IP "\fB\-dH\fR" 4
 .IX Item "-dH"
 Produce a core dump whenever an error occurs.
-.IP "\fB\-dm\fR" 4
-.IX Item "-dm"
-Print statistics on memory usage, at the end of the run, to
-standard error.
 .IP "\fB\-dp\fR" 4
 .IX Item "-dp"
 Annotate the assembler output with a comment indicating which
@@ -9415,8 +9416,8 @@ assembly code.  Permissible names are: \fBarm2\fR, \fBarm250\fR,
 \&\fBarm10e\fR, \fBarm1020e\fR, \fBarm1022e\fR,
 \&\fBarm1136j\-s\fR, \fBarm1136jf\-s\fR, \fBmpcore\fR, \fBmpcorenovfp\fR,
 \&\fBarm1156t2\-s\fR, \fBarm1156t2f\-s\fR, \fBarm1176jz\-s\fR, \fBarm1176jzf\-s\fR,
-\&\fBcortex\-a5\fR, \fBcortex\-a8\fR, \fBcortex\-a9\fR, \fBcortex\-a15\fR,
-\&\fBcortex\-r4\fR, \fBcortex\-r4f\fR, \fBcortex\-r5\fR,
+\&\fBcortex\-a5\fR, \fBcortex\-a7\fR, \fBcortex\-a8\fR, \fBcortex\-a9\fR, 
+\&\fBcortex\-a15\fR, \fBcortex\-r4\fR, \fBcortex\-r4f\fR, \fBcortex\-r5\fR,
 \&\fBcortex\-m4\fR, \fBcortex\-m3\fR,
 \&\fBcortex\-m1\fR,
 \&\fBcortex\-m0\fR,
@@ -11813,6 +11814,10 @@ This option instructs \s-1GCC\s0 to emit a \f(CW\*(C`vzeroupper\*(C'\fR instruct
 before a transfer of control flow out of the function to minimize
 \&\s-1AVX\s0 to \s-1SSE\s0 transition penalty as well as remove unnecessary zeroupper 
 intrinsics.
+.IP "\fB\-mprefer\-avx128\fR" 4
+.IX Item "-mprefer-avx128"
+This option instructs \s-1GCC\s0 to use 128\-bit \s-1AVX\s0 instructions instead of
+256\-bit \s-1AVX\s0 instructions in the auto-vectorizer.
 .IP "\fB\-mcx16\fR" 4
 .IX Item "-mcx16"
 This option will enable \s-1GCC\s0 to use \s-1CMPXCHG16B\s0 instruction in generated code.
@@ -15858,12 +15863,16 @@ Mark the \f(CW\*(C`MAC\*(C'\fR register as call-clobbered, even if
 \&\fB\-mhitachi\fR is given.
 .IP "\fB\-mieee\fR" 4
 .IX Item "-mieee"
-Increase IEEE-compliance of floating-point code.
-At the moment, this is equivalent to \fB\-fno\-finite\-math\-only\fR.
-When generating 16 bit \s-1SH\s0 opcodes, getting IEEE-conforming results for
-comparisons of NANs / infinities incurs extra overhead in every
-floating point comparison, therefore the default is set to
-\&\fB\-ffinite\-math\-only\fR.
+.PD 0
+.IP "\fB\-mno\-ieee\fR" 4
+.IX Item "-mno-ieee"
+.PD
+Control the \s-1IEEE\s0 compliance of floating-point comparisons, which affects the
+handling of cases where the result of a comparison is unordered.  By default
+\&\fB\-mieee\fR is implicitly enabled.  If \fB\-ffinite\-math\-only\fR is
+enabled \fB\-mno\-ieee\fR is implicitly set, which results in faster
+floating-point greater-equal and less-equal comparisons.  The implcit settings
+can be overridden by specifying either \fB\-mieee\fR or \fB\-mno\-ieee\fR.
 .IP "\fB\-minline\-ic_invalidate\fR" 4
 .IX Item "-minline-ic_invalidate"
 Inline code to invalidate instruction cache entries after setting up
